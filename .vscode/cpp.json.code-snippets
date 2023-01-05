@@ -1,0 +1,50 @@
+{
+      "C++ Snippet": 
+      {
+        "prefix": "cp",
+        "body": [
+
+          "#include <bits/stdc++.h>",
+          "using namespace std;",
+          "",
+          "#define ll long long int",
+          "#define vi vector<int>",
+          "#define vs  vector<string>",
+          "#define vll vector<long long>",
+          "#define endl \"\\n\"",
+          "#define pb push_back",
+          "",
+          "",
+          "",
+          "#define f(i,s,e) for(long long int i=s;i<e;i++)",
+          "#define cf(i,s,e) for(long long int i=s;i<=e;i++)",
+          "#define rf(i,e,s) for(long long int i=e-1;i>=s;i--)",
+          "#define cap(t) transform(t.begin(), t.end(), t.begin(), ::toupper); //t is a string",
+          "#define low(t) transform(t.begin(), t.end(), t.begin(), ::tolower);",
+          "#define string_split(s,delimiter) size_t last = 0; size_t next = 0; while ((next = s.find(delimiter, last)) != string::npos) {   cout << s.substr(last, next-last) << endl;   last = next + 1; } cout << s.substr(last) << endl;",
+          "#define fill2D(arr,M,N,s) std::fill_n(&arr[0][0], M*N, s) // M,N = dimensions, s = value to be filled",
+          "",
+          "template <class T>",
+          "void print_v(vector<T> &v) { for (auto x : v) cout << x << endl; }",
+          "",
+          "",
+          "",
+          "int main() {",
+          "#ifndef ONLINE_JUDGE",
+          "\tfreopen(\"input.txt\", \"r\", stdin);",
+          "\tfreopen(\"output.txt\", \"w\", stdout);",
+          "#endif",
+          "\tios_base::sync_with_stdio(0);",
+          "\tcin.tie(0); cout.tie(0);",
+          "\tint t;",
+          "\tcin >> t;",
+          "",
+          "\twhile(t--) {",
+          "\t\t",
+          "\t}",
+          "\treturn 0;",
+          "} "
+        ],
+        "description": "C++ Snippet"
+      }
+}
