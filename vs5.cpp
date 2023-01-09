@@ -46,7 +46,7 @@ typedef vector<vs> vvs;
     while ((next = s.find(delimiter, last)) != string::npos) \
     {                                                        \
         cout << s.substr(last, next - last) << endl;         \
-        last = next + 1;                                     \
+        last = next + 1;                                      \
     }                                                        \
     cout << s.substr(last) << endl;
 
@@ -60,8 +60,8 @@ void print_v(vector<T> &v)
     coen;
 }
 
-int main()
-{
+
+int main() {
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
