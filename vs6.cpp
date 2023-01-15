@@ -46,7 +46,7 @@ typedef vector<vs> vvs;
     while ((next = s.find(delimiter, last)) != string::npos) \
     {                                                        \
         cout << s.substr(last, next - last) << endl;         \
-        last = next + 1;                                     \
+        last = next + 1;                                      \
     }                                                        \
     cout << s.substr(last) << endl;
 
@@ -60,16 +60,67 @@ void print_v(vector<T> &v)
     coen;
 }
 
-int main()
-{
+vpii l;
 
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin);
-        freopen("output.txt", "w", stdout);
-    #endif
+int tilingRectangle(int n, int m, bool flag) {
+    if (n == m) {
+        return 1;
+    }
+    else if ((n == 0) || (m == 0)) {
+        return 0;
+    }
+    
+    if (flag == true) {
+        int g = min(n,m);
+        while(g!=0) {
+            int d = 1 + tilingRectangle(max(n, m) - g, min(n, m), false) +
+                   tilingRectangle(max(n, m), min(n, m) - g, false) -
+                   tilingRectangle(max(n, m) - g, min(n, m) - g, false);
+            l.pb({g,d});
+            g--;
+        }
+        
+    }
+    else {
+        int g = min(n, m);
+        int d = 1 + tilingRectangle(max(n, m) - g, min(n, m), false) +
+                    tilingRectangle(max(n, m), 
+                    min(n, m) - g, false) -
+                    tilingRectangle(max(n, m) - g, min(n, m) - g, false);
+        
+        
+    }
+
+        
+    
+    // int g = (n * m);
+    // g = g / (min(n, m) * min(n, m));
+    // return (g + tilingRectangle(min(n, m), max(n, m) - g * min(n, m)));
+        
+}
+
+
+int main() {
+
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
- 
+    int n, m;
+    cin >> n >> m;
+    // vpii l;
+    // for (int i = min(m, n); i >= 1; i--)
+    // {
+    //     
+    //     l.pb({i,x});
+    // }
+    int x = tilingRectangle(n, m, true);
+    for(int k = 0; k < l.size(); k ++) {
+        cout << l[k].ff << " " << l[k].ss << endl;
+    }
+
     return 0;
-}
+    }

@@ -46,7 +46,7 @@ typedef vector<vs> vvs;
     while ((next = s.find(delimiter, last)) != string::npos) \
     {                                                        \
         cout << s.substr(last, next - last) << endl;         \
-        last = next + 1;                                     \
+        last = next + 1;                                      \
     }                                                        \
     cout << s.substr(last) << endl;
 
@@ -60,16 +60,99 @@ void print_v(vector<T> &v)
     coen;
 }
 
+bool SudokuCheck(vector<vector<char>> &t, int row, int col, char c)
+{
+    
+        
+    f(i,0,9) {
+        if (t[i][col] != '.' && t[i][col] == c) {
+            return false;
+        }
+        if (t[row][i] != '.' && t[row][i] == c)
+        {
+            return false;
+        }
+    }
+
+
+    f(i,(row/3) * 3,(row/3 + 1) * 3) {
+        f(j, (col / 3) * 3, (col / 3 + 1) * 3) {
+            if (t[i][j] == c) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
+bool solve(vector<vector<char>> &t)
+{
+
+    f(i,0,9) {
+        f(j,0,9) {
+            if (t[i][j] == '.') {
+                for(char c='1'; c <= '9'; c++) {
+                    if (SudokuCheck(t,i,j,c)) {
+                        t[i][j] = c;
+                        if (solve(t)) {
+                            return true;
+                        }
+                        else {
+                            t[i][j] = '.';
+                        }
+
+
+                    }
+                }
+                return false;
+            
+            }
+        }
+    }
+    return true;
+}
+void solveSudoku(vector<vector<char>> &board)
+{
+    if (solve(board))
+    {
+        f(i,0,9) {
+            f(j,0,9) {
+                cout << board[i][j] << " ";
+            }
+            coen;
+        }
+    }
+}
+
 int main()
 {
 
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin);
-        freopen("output.txt", "w", stdout);
-    #endif
-    ios_base::sync_with_stdio(0);
+#ifndef ONLINE_JUDGE
+    freopen("notep1.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+    ios_base::sync_with_stdio(0); 
     cin.tie(0);
     cout.tie(0);
- 
+
+    int n = 9;
+    char s;
+    vector<vector<char>> su;
+    f(i,0,9) {
+        vector<char> t;
+        f(j,0,9) {
+            cin >> s;
+            t.pb(s);
+        }
+        su.pb(t);
+        
+    }
+    solveSudoku(su);
+
+
+
+
+
     return 0;
 }

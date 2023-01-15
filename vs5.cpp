@@ -59,124 +59,19 @@ void print_v(vector<T> &v)
         cout << x << " ";
     coen;
 }
-vector<vector<vector<char>>> r;
-
-void rec(vector<vector<char>> &t, int &i, int &j, bool &ret)
-{
-    if (i == 8 && j == 8) {
-        r.pb(t);
-        return;
-        
-    }
-    else if(ret == true) {
-        return;
-    }
-    
-    if (j >= 8) {
-        j = 0;
-        i++;
-        
-    }
-
-
-
-    if (t[i][j] == '.') {
-        set<char> present;
-        set<char> e;
-        set<char> left;
-        f(x,1,10) {
-            e.insert(x);
-        }
-
-
-        f(p,0,9) {
-            if (t[p][j] != '.'){
-                present.insert(t[p][j]);
-            }
-            if (t[i][p] != '.'){
-                present.insert(t[i][p]);
-            }
-        }
-
-        f(x, 3 * (i / 3), 3 * ((i / 3) + 1))
-        {
-            f(y, 3 * (j / 3), 3 * ((j / 3) + 1)) {
-                if (t[x][y] != '.')
-                    present.insert(t[x][y]);
-            }
-        }
-        for (auto x: e) {
-            if (find(all(present),x) == present.end()) {
-                left.insert(x);
-            }
-        }
-        for(auto tt: left) {
-            t[i][j] = tt;
-            j = j+1;
-            ret = false;
-            cout << i << " " << j << " " << t[i][j] << endl;
-            rec(t,i,j,ret);
-            j--;
-            t[i][j] = '.';
-        }
-    }
-    else {
-        f(k,0,9) {
-            if ((t[i][j] == t[i][k]) || (t[i][j] == t[k][j])) {
-                ret = true;
-            }
-
-
-        }
-        f(x, 3 * (i / 3), 3 * ((i / 3) + 1))
-        {
-            f(y, 3 * (j / 3), 3 * ((j / 3) + 1))
-            {
-                if (t[i][j] == t[x][y]) {
-                    ret = true;
-                }
-                
-            }
-        }
-    }
-}
 
 int main()
 {
 
 #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
+    freopen("notep1.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
 
-    int n = 9;
-    char s;
-    vector<vector<char>> su;
-    f(i,0,9) {
-        vector<char> t;
-        f(j,0,9) {
-            cin >> s;
-            t.pb(s);
-        }
-        su.pb(t);
-        
-    }
-    int i = 0, j = 0;
-    bool ret = false;
-    rec(su,i,j, ret);
 
-
-
-    // for(auto f: r) {
-    //     for(auto t:f) {
-    //         for(auto h:t)
-    //             cout << h << " ";
-    //     }
-    //     coen;
-    // }
 
     return 0;
 }
