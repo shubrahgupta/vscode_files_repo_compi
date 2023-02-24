@@ -46,7 +46,7 @@ typedef vector<vs> vvs;
     while ((next = s.find(delimiter, last)) != string::npos) \
     {                                                        \
         cout << s.substr(last, next - last) << endl;         \
-        last = next + 1;                                     \
+        last = next + 1;                                      \
     }                                                        \
     cout << s.substr(last) << endl;
 
@@ -61,6 +61,64 @@ void print_v(vector<T> &v)
 }
 
 
+
+int lower_bound(vi &arr, int to_find) {
+    int lo = 0, hi = arr.size()-1;
+    while (hi - lo > 1)
+    {
+        int mid = (hi + lo) / 2;
+        if (arr[mid] >= to_find)
+        {
+            hi = mid;
+        }
+        else
+        {
+            lo = mid+1;
+        }
+    }
+    if (arr[lo] >= to_find)
+    {
+        return lo;
+    }
+    else if (arr[hi] >= to_find)
+    {
+        return hi;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+int upper_bound(vi &arr, int to_find)
+{
+    int lo = 0, hi = arr.size() - 1;
+    while (hi - lo > 1)
+    {
+        int mid = (hi + lo) / 2;
+        if (arr[mid] > to_find)
+        {
+            hi = mid;
+        }
+        else
+        {
+            lo = mid + 1;
+        }
+    }
+    if (arr[lo] > to_find)
+    {
+        return lo;
+    }
+    else if (arr[hi] > to_find)
+    {
+        return hi;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
 int main()
 {
 
@@ -71,9 +129,23 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int n;
+    int n, to_find, x;
     cin >> n;
+    
+    int lo = 0, hi = n-1;
+    vi arr;
+    f(i,0,n) {
+        cin >> x;
+        arr.pb(x);
+    }
+    cin >> to_find;
 
+    int lb = lower_bound(arr,to_find);
+    int ub = upper_bound(arr, to_find);
 
+    // cout << lb << " " <<  (lb != -1 ? arr[lb89] : -1) << endl;
+    // cout << ub << " " << (ub != -1 ? arr[ub] : -1) << endl;
+    cout << lb << endl;
+    cout << ub << endl;
     return 0;
 }

@@ -5,6 +5,7 @@ using namespace std;
 #define ll long long int
 typedef long long LL;
 #define vi vector<int>
+#define vd vector<double>
 #define vs vector<string>
 #define vll vector<long long>
 typedef pair<int, int> pii;
@@ -33,7 +34,7 @@ typedef vector<vs> vvs;
 #define ss second
 
 #define w(t)  \
-    int t;    \
+    ll t;     \
     cin >> t; \
     while (t--)
 
@@ -60,7 +61,42 @@ void print_v(vector<T> &v)
     coen;
 }
 
+const int N = 1e5+10;
+vector<int> al[N];
+// int am[N][N];
+bool visited[N];
 
+void dfs(int vertex) {
+    /*things to do after entering vertex*/
+    visited[vertex] = true;
+    for(int child: al[vertex]) {
+        // cout << "parent " << vertex << " child " << child << endl;
+        /*things to do before entering child*/
+        if (visited[child]) {
+            continue;
+        }
+        // cout << child << endl;
+        
+        dfs(child);
+        /*things to do after exiting child*/
+    }
+
+
+    /*things to do before exiting vertex*/
+}
+//O(V+E)
+
+
+// 6 9
+// 1 3
+// 1 5
+// 3 5
+// 3 4
+// 3 6
+// 3 2
+// 2 6
+// 4 6
+// 5 6
 int main()
 {
 
@@ -71,8 +107,54 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int n;
-    cin >> n;
+    int n, m;
+    cin >> n >> m;
+    f(i,0,m) {
+        int v1, v2;
+        cin >> v1 >> v2;
+
+        // am[v1][v2] = 1;
+        // am[v2][v1] = 1;
+
+        al[v1].pb(v2);
+        al[v2].pb(v1);
+        
+
+
+    }
+    int conn = 0;
+    vector<set<int>> components;
+    set<int> comp;
+    cf(i,1,n) {
+
+        if (visited[i] == false) {
+            if(comp.size() > 0) {
+                components.pb(comp);
+                comp.clear();
+            }
+
+            comp.insert(i);
+            dfs(i);
+            conn+=1;
+            if (i==n) {
+                components.pb(comp);
+            }
+        }
+        else {
+            comp.insert(i);
+        }
+        
+    }
+    cout << "Number of components: " << conn << endl;
+    // cout << components.size() << endl;
+    cout << "Components list: " << endl;
+    for(auto x:components) {
+        
+        for(int i : x){
+            cout << i << " ";
+        }
+        coen;
+    }
 
 
     return 0;

@@ -5,6 +5,7 @@ using namespace std;
 #define ll long long int
 typedef long long LL;
 #define vi vector<int>
+#define vd vector<double>
 #define vs vector<string>
 #define vll vector<long long>
 typedef pair<int, int> pii;
@@ -15,6 +16,7 @@ typedef vector<pii> vpii;
 typedef vector<pll> vpll;
 typedef vector<vll> vvl;
 typedef vector<vs> vvs;
+
 
 #define endl "\n"
 #define pb push_back
@@ -71,9 +73,22 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int n;
-    cin >> n;
-
-
+    
+    double x, nth;
+    cin >> x >> nth;
+    double eps = 1e-6;
+    double hi = x, lo = 1;
+    while(hi-lo > eps) {
+        double mid = (hi + lo) /2;
+        if (pow(mid,nth) < x) {
+            lo = mid;
+        }
+        else {
+            hi = mid;
+        }
+    }
+    cout << hi << endl;
+    cout << lo << endl;
+    
     return 0;
 }
