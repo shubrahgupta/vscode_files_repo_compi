@@ -5,11 +5,13 @@ using namespace std;
 #define ll long long int
 typedef long long LL;
 #define vi vector<int>
+#define vd vector<double>
 #define vs vector<string>
 #define vll vector<long long>
 typedef pair<int, int> pii;
 typedef pair<LL, LL> pll;
 typedef pair<string, string> pss;
+typedef pair<int, pair<int, int>> ppi;
 typedef vector<vi> vvi;
 typedef vector<pii> vpii;
 typedef vector<pll> vpll;
@@ -33,7 +35,7 @@ typedef vector<vs> vvs;
 #define ss second
 
 #define w(t)  \
-    int t;    \
+    ll t;     \
     cin >> t; \
     while (t--)
 

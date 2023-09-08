@@ -11,7 +11,6 @@ typedef long long LL;
 typedef pair<int, int> pii;
 typedef pair<LL, LL> pll;
 typedef pair<string, string> pss;
-typedef pair<int, pair<int, int>> ppi;
 typedef vector<vi> vvi;
 typedef vector<pii> vpii;
 typedef vector<pll> vpll;
@@ -62,22 +61,48 @@ void print_v(vector<T> &v)
     coen;
 }
 
-int solve(int n, int k, int l) {
-    if (n == 0 || k == 0 || k == n+1)
-    {
-        return l;
+const int N = 1e5 + 10;
+vector<int> al[N];
+bool visited[N];
+
+
+void dfs(int i, int j, vector<vector<int>> &image, int &peri, bool &found, vector<vector<bool>> &visit, int &count)
+{
+    /*things to do after entering vertex*/
+
+    int m = image.size();
+    int n = image[0].size();
+    if (i < 0 || j < 0)
+        return;
+    if (i >= m || j >= n)
+        return;
+    if (visit[i][j]) {
+        return;
     }
-    return solve(n-1,k-1,l) + solve(n-1,k,l);
+    if (image[i][j] == 0 && found == true) return;
+    if (image[i][j] == 1) {
+        found = true;
+        count += 1;
+        peri += 4-2;
+    }
+    cout << "{" << i << " " << j << "} " << image[i][j] << " " << peri << endl;
+    visit[i][j] = true;
+    dfs(i - 1, j, image, peri, found, visit, count);
+    dfs(i + 1, j, image, peri, found, visit, count);
+    dfs(i, j - 1, image, peri, found, visit, count);
+    dfs(i, j + 1, image, peri, found, visit, count);
 }
-void ans(int n, int l) {
-    vector<int> v;
-    for (int k = 0; k <= n+1; k++) {
-        v.push_back(solve(n,k,l));
-    }
-    for(auto x: v) {
-        cout << x << " ";
-    }
-    cout << endl;
+// O(V+E)
+
+
+int islandPerimeter(vector<vector<int>> &grid)
+{
+    vector<vector<bool>> visit(grid.size()+2, vector<bool>(grid[0].size()+2, false));
+    int peri = 0, count = 0;
+    bool found = false;
+    dfs(0,0,grid,peri, found, visit, count);
+    if (count == (grid.size() * grid[0].size()))  return count*2;
+    else return peri + 2;
 }
 
 int main()
@@ -90,8 +115,32 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int n, l;
-    cin >> n >> l;
-    ans(n-1,l);
+    // int n, m;
+    // cin >> n >> m;
+    // f(i, 0, m)
+    // {
+    //     int v1, v2;
+    //     cin >> v1 >> v2;
+
+    //     // am[v1][v2] = 1;
+    //     // am[v2][v1] = 1;
+
+    //     al[v1].pb(v2);
+    //     al[v2].pb(v1);
+    // }
+    int row,column,x;
+    vector<vector<int>> grid;
+    vector<int> r;
+    cin >> row >> column;
+    f(i,0,row) {
+        r.clear();
+        f(j,0,column) {
+            cin >> x;
+            r.pb(x);
+        }
+        grid.pb(r);
+    }
+    cout << islandPerimeter(grid) << endl;
+
     return 0;
 }

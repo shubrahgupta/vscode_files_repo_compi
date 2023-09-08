@@ -11,7 +11,6 @@ typedef long long LL;
 typedef pair<int, int> pii;
 typedef pair<LL, LL> pll;
 typedef pair<string, string> pss;
-typedef pair<int, pair<int, int>> ppi;
 typedef vector<vi> vvi;
 typedef vector<pii> vpii;
 typedef vector<pll> vpll;
@@ -62,22 +61,32 @@ void print_v(vector<T> &v)
     coen;
 }
 
-int solve(int n, int k, int l) {
-    if (n == 0 || k == 0 || k == n+1)
-    {
-        return l;
-    }
-    return solve(n-1,k-1,l) + solve(n-1,k,l);
+const int N = 1e5 + 10;
+vector<int> al[N];
+bool visited[N];
+
+void dfs(int i, int j, vector<vector<int>> &image, int initialColor, int color)
+{
+    /*things to do after entering vertex*/
+
+    int m = image.size();
+    int n = image[0].size();
+    if (i < 0 || j < 0) return;
+    if (i >= m || j >= n) return;
+    if (image[i][j] != initialColor) return;
+
+    image[i][j] = color;
+    
+    dfs(i-1,j, image, initialColor, color);
+    dfs(i + 1, j, image, initialColor, color);
+    dfs(i, j - 1, image, initialColor, color);
+    dfs(i, j + 1, image, initialColor, color);
 }
-void ans(int n, int l) {
-    vector<int> v;
-    for (int k = 0; k <= n+1; k++) {
-        v.push_back(solve(n,k,l));
-    }
-    for(auto x: v) {
-        cout << x << " ";
-    }
-    cout << endl;
+// O(V+E)
+vector<vector<int>> floodFill(vector<vector<int>> &image, int sr, int sc, int color)
+{
+    int initialColor = image[sr][sc];
+    dfs(sr,sc,image,initialColor, color);
 }
 
 int main()
@@ -90,8 +99,21 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int n, l;
-    cin >> n >> l;
-    ans(n-1,l);
+    int n, m;
+    cin >> n >> m;
+    f(i, 0, m)
+    {
+        int v1, v2;
+        cin >> v1 >> v2;
+
+        // am[v1][v2] = 1;
+        // am[v2][v1] = 1;
+
+        al[v1].pb(v2);
+        al[v2].pb(v1);
+    }
+
+
+
     return 0;
 }

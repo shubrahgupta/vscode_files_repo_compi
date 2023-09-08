@@ -11,6 +11,7 @@ typedef long long LL;
 typedef pair<int, int> pii;
 typedef pair<LL, LL> pll;
 typedef pair<string, string> pss;
+typedef pair<int, pair<int, int>> ppi;
 typedef vector<vi> vvi;
 typedef vector<pii> vpii;
 typedef vector<pll> vpll;
@@ -61,35 +62,8 @@ void print_v(vector<T> &v)
     coen;
 }
 
-int maxProfit(vector<int>& prices) {
-    // int profit = 0;
-    if (prices.size() == 1) {
-        return 0;
-    }
-    vector<int> profits;
-    for(int i = 0; i < prices.size()-1; i++) {
-        int buy_price = prices[i];
-        int max_profit = 0;
-        int profit = 0;
-        for(int j = i+1; j < prices.size(); j++) {
-            int sell_price = prices[j];
-            profit = sell_price - buy_price;
-            if (profit > max_profit) {
-                max_profit = profit;
-            }
-        }
-        profits.push_back(max_profit);
-    }
-    if (*max_element(profits.begin(), profits.end()) > 0) {
-        return *max_element(profits.begin(), profits.end());
-    }
-    else {
-        return 0;
-    }
-}
-
-
-int main(){
+int main()
+{
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
@@ -98,13 +72,6 @@ int main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int n,x;
-    vi a;
-    cin >> n;
-    f(i,0,n) {
-        cin >> x;
-        a.pb(x);
-    }
-    cout << maxProfit(a) << endl;
+
     return 0;
 }

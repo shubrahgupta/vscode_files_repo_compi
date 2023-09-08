@@ -11,7 +11,6 @@ typedef long long LL;
 typedef pair<int, int> pii;
 typedef pair<LL, LL> pll;
 typedef pair<string, string> pss;
-typedef pair<int, pair<int, int>> ppi;
 typedef vector<vi> vvi;
 typedef vector<pii> vpii;
 typedef vector<pll> vpll;
@@ -62,23 +61,30 @@ void print_v(vector<T> &v)
     coen;
 }
 
-int solve(int n, int k, int l) {
-    if (n == 0 || k == 0 || k == n+1)
+long test(int n, int index, int a)
+{
+    int b = max(a - index, 0);
+    long res = long(a + b) * (a - b + 1) / 2;
+    b = max(a - ((n - 1) - index), 0);
+    res += long(a + b) * (a - b + 1) / 2;
+    return res - a;
+}
+
+int maxValue(int n, int index, int maxSum)
+{
+    maxSum -= n;
+    int left = 0, right = maxSum, mid;
+    while (left < right)
     {
-        return l;
+        mid = (left + right + 1) / 2;
+        if (test(n, index, mid) <= maxSum)
+            left = mid;
+        else
+            right = mid - 1;
     }
-    return solve(n-1,k-1,l) + solve(n-1,k,l);
+    return left + 1;
 }
-void ans(int n, int l) {
-    vector<int> v;
-    for (int k = 0; k <= n+1; k++) {
-        v.push_back(solve(n,k,l));
-    }
-    for(auto x: v) {
-        cout << x << " ";
-    }
-    cout << endl;
-}
+
 
 int main()
 {
@@ -90,8 +96,12 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int n, l;
-    cin >> n >> l;
-    ans(n-1,l);
+    int n, k, maxSum;
+    int x;
+    f(i,0,1) {
+        cin >> n >> k >> maxSum;
+        cout << maxValue(n,k,maxSum) << endl;
+    }
     return 0;
 }
+

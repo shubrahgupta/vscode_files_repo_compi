@@ -11,7 +11,6 @@ typedef long long LL;
 typedef pair<int, int> pii;
 typedef pair<LL, LL> pll;
 typedef pair<string, string> pss;
-typedef pair<int, pair<int, int>> ppi;
 typedef vector<vi> vvi;
 typedef vector<pii> vpii;
 typedef vector<pll> vpll;
@@ -33,7 +32,6 @@ typedef vector<vs> vvs;
 
 #define ff first
 #define ss second
-
 #define w(t)  \
     ll t;     \
     cin >> t; \
@@ -62,27 +60,12 @@ void print_v(vector<T> &v)
     coen;
 }
 
-int solve(int n, int k, int l) {
-    if (n == 0 || k == 0 || k == n+1)
-    {
-        return l;
-    }
-    return solve(n-1,k-1,l) + solve(n-1,k,l);
-}
-void ans(int n, int l) {
-    vector<int> v;
-    for (int k = 0; k <= n+1; k++) {
-        v.push_back(solve(n,k,l));
-    }
-    for(auto x: v) {
-        cout << x << " ";
-    }
-    cout << endl;
-}
 
-int main()
-{
 
+
+//{ Driver Code Starts.
+
+int main() {
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
@@ -90,8 +73,9 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int n, l;
-    cin >> n >> l;
-    ans(n-1,l);
+    ll m = pow(10, 9) + 7;
+    cout << m << endl;
     return 0;
 }
+
+//{ Driver Code Starts.

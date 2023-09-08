@@ -61,8 +61,98 @@ void print_v(vector<T> &v)
     coen;
 }
 
+class node {
+public: 
+    int data;
+    node* next;
 
+    node(int data) {
+        this->data = data;
+        this->next = NULL;
+    }
+};
 
+void insertAtTail(node* &head, int val) {
+
+    node* new_node = new node(val);
+
+    if (head == NULL) {
+        head = new_node;
+        return;
+    }
+    node* temp = head;
+    while(temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = new_node;
+
+}
+void insertAtFront(node* &head, int val)
+{
+    node* new_node = new node(val);
+    new_node->next = head;
+    head = new_node;
+}
+
+void insertAfter(node* &prev, int val) {
+    if (prev == NULL) {
+        cout << "previous node was a null node" << endl;
+
+    }
+    node* new_node = new node(val);
+    new_node->next = prev->next;
+    prev->next = new_node;
+}
+
+void display_ll(node* head) {
+    node* temp = head;
+    while(temp != NULL) {
+        cout << temp->data << "->";
+        temp = temp->next;
+    }
+    cout << "NULL" << endl;
+}
+
+void deleteAtStart(node* &head) {
+    if (head == NULL) {
+        cout << "nothing to delete" << endl;
+    }
+    node* temp = head->next;
+    head->next = NULL;
+    delete head;
+    head = temp;
+
+}
+
+void deleteAtTail(node* &head)
+{
+    node *temp = head;
+    while(temp->next->next != NULL) {
+        temp = temp->next;
+    }
+
+    node* el = temp->next;
+    temp->next = NULL;
+    delete el;
+
+}
+
+void deletePresent(node* &head, int val)
+{
+    node *temp = head;
+    while (temp->next != NULL)
+    {
+        if (temp->next->data == val) {
+            node* el = temp->next;
+            temp->next = el->next;
+            el->next = NULL;
+            delete el;
+            return;
+        }
+        else    temp = temp->next;
+    }
+    cout << "Element not present" << endl;
+}
 
 int main()
 {
@@ -75,6 +165,29 @@ int main()
     cin.tie(0);
     cout.tie(0);
 
+    node* head = NULL;
+    insertAtTail(head, 4545);
+    insertAtTail(head, 788);
+    display_ll(head);
+    insertAtFront(head, 5005);
+    insertAtFront(head, 32);
+    insertAtFront(head, 554);
+    insertAtFront(head, 11);
+    display_ll(head);
+    node* temp = head;
+    while(temp->data!=32) {
+        temp = temp->next;
+    }
+    insertAfter(temp, 64);
+    display_ll(head);
+    deleteAtStart(head);
+    deleteAtTail(head);
+
+    display_ll(head);
+    deletePresent(head, 64);
+    display_ll(head);
+    deletePresent(head, 70);
+    display_ll(head);
     return 0;
 }
 

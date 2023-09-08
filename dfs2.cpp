@@ -11,7 +11,6 @@ typedef long long LL;
 typedef pair<int, int> pii;
 typedef pair<LL, LL> pll;
 typedef pair<string, string> pss;
-typedef pair<int, pair<int, int>> ppi;
 typedef vector<vi> vvi;
 typedef vector<pii> vpii;
 typedef vector<pll> vpll;
@@ -62,24 +61,47 @@ void print_v(vector<T> &v)
     coen;
 }
 
-int solve(int n, int k, int l) {
-    if (n == 0 || k == 0 || k == n+1)
-    {
-        return l;
-    }
-    return solve(n-1,k-1,l) + solve(n-1,k,l);
-}
-void ans(int n, int l) {
-    vector<int> v;
-    for (int k = 0; k <= n+1; k++) {
-        v.push_back(solve(n,k,l));
-    }
-    for(auto x: v) {
-        cout << x << " ";
-    }
-    cout << endl;
-}
+const int N = 1e5 + 10;
+vector<int> al[N];
+bool visited[N];
 
+bool dfs(int vertex, int parent)
+{
+    /*things to do after entering vertex*/
+    visited[vertex] = true;
+    bool doesLoopExist = false;
+    for (int child : al[vertex])
+    {
+        // cout << "parent " << vertex << " child " << child << endl;
+        /*things to do before entering child*/
+        if (visited[child] && (child == parent))
+        {
+            continue;
+        }
+        if (visited[child]) {
+            return true;
+        }
+            // cout << child << endl;
+
+        doesLoopExist |= dfs(child, vertex);
+        /*things to do after exiting child*/
+    }
+    return doesLoopExist;
+
+    /*things to do before exiting vertex*/
+}
+// O(V+E)
+
+// 6 9
+// 1 3
+// 1 5
+// 3 5
+// 3 4
+// 3 6
+// 3 2
+// 2 6
+// 4 6
+// 5 6
 int main()
 {
 
@@ -90,8 +112,31 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-    int n, l;
-    cin >> n >> l;
-    ans(n-1,l);
+    int n, m;
+    cin >> n >> m;
+    f(i, 0, m)
+    {
+        int v1, v2;
+        cin >> v1 >> v2;
+
+        // am[v1][v2] = 1;
+        // am[v2][v1] = 1;
+
+        al[v1].pb(v2);
+        al[v2].pb(v1);
+    }
+
+    bool doesLoopExist = false;
+    cf(i, 0, n-1)
+    {
+        if (visited[i]) continue;
+        if (dfs(i,0)) {
+            doesLoopExist = true;
+            break;
+        }
+        
+    }
+    cout << doesLoopExist << endl;
+
     return 0;
 }

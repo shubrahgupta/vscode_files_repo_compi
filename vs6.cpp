@@ -5,11 +5,13 @@ using namespace std;
 #define ll long long int
 typedef long long LL;
 #define vi vector<int>
+#define vd vector<double>
 #define vs vector<string>
 #define vll vector<long long>
 typedef pair<int, int> pii;
 typedef pair<LL, LL> pll;
 typedef pair<string, string> pss;
+typedef pair<int, pair<int, int>> ppi;
 typedef vector<vi> vvi;
 typedef vector<pii> vpii;
 typedef vector<pll> vpll;
@@ -33,7 +35,7 @@ typedef vector<vs> vvs;
 #define ss second
 
 #define w(t)  \
-    int t;    \
+    ll t;     \
     cin >> t; \
     while (t--)
 
@@ -46,7 +48,7 @@ typedef vector<vs> vvs;
     while ((next = s.find(delimiter, last)) != string::npos) \
     {                                                        \
         cout << s.substr(last, next - last) << endl;         \
-        last = next + 1;                                      \
+        last = next + 1;                                     \
     }                                                        \
     cout << s.substr(last) << endl;
 
@@ -60,9 +62,8 @@ void print_v(vector<T> &v)
     coen;
 }
 
-
-
-int main() {
+int main()
+{
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
@@ -71,7 +72,6 @@ int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cout.tie(0);
-
 
     return 0;
 }

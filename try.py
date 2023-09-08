@@ -9,9 +9,10 @@ import sys
 def main():
     sys.stdin = open('input.txt', 'r')
     sys.stdout = open('output.txt', 'w')
-
-
-    s = str(input())
+    clues = []
+    for i in range(4):
+        s = str(input())
+        clues.append(s)
     # print(s)
     a = {}
     for i in range(len(s)):

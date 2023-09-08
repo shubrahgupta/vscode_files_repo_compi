@@ -70,12 +70,12 @@ void dfs(int vertex) {
     /*things to do after entering vertex*/
     visited[vertex] = true;
     for(int child: al[vertex]) {
-        // cout << "parent " << vertex << " child " << child << endl;
+        cout << "parent " << vertex << " child " << child << endl;
         /*things to do before entering child*/
         if (visited[child]) {
             continue;
         }
-        // cout << child << endl;
+        cout << child << endl;
         
         dfs(child);
         /*things to do after exiting child*/
@@ -85,7 +85,12 @@ void dfs(int vertex) {
     /*things to do before exiting vertex*/
 }
 //O(V+E)
-
+// 8 5
+// 1 2
+// 2 3
+// 2 4
+// 3 5
+// 6 7
 
 // 6 9
 // 1 3
@@ -97,6 +102,8 @@ void dfs(int vertex) {
 // 2 6
 // 4 6
 // 5 6
+
+
 int main()
 {
 
@@ -125,36 +132,42 @@ int main()
     int conn = 0;
     vector<set<int>> components;
     set<int> comp;
-    cf(i,1,n) {
+    // cf(i,1,n) {
 
-        if (visited[i] == false) {
-            if(comp.size() > 0) {
-                components.pb(comp);
-                comp.clear();
-            }
+    //     if (visited[i] == false) {
+    //         if(comp.size() > 0) {
+    //             components.pb(comp);
+    //             comp.clear();
+    //         }
 
-            comp.insert(i);
-            dfs(i);
-            conn+=1;
-            if (i==n) {
-                components.pb(comp);
-            }
-        }
-        else {
-            comp.insert(i);
-        }
+    //         comp.insert(i);
+    //         dfs(i);
+    //         conn+=1;
+    //         if (i==n) {
+    //             components.pb(comp);
+    //         }
+    //     }
+    //     else {
+    //         comp.insert(i);
+    //     }
         
+    // }
+    cf(i, 1, n)
+    {
+        if (visited[i]) continue;
+        dfs(i);
+
     }
-    cout << "Number of components: " << conn << endl;
-    // cout << components.size() << endl;
-    cout << "Components list: " << endl;
-    for(auto x:components) {
+    // cout << "Number of components in undirected graph: " << conn << endl;
+    // // cout << components.size() << endl;
+    // cout << "Components list: " << endl;
+    // for(auto x:components) {
         
-        for(int i : x){
-            cout << i << " ";
-        }
-        coen;
-    }
+    //     for(int i : x){
+    //         cout << i << " ";
+    //     }
+    //     coen;
+    // }
 
 
     return 0;
